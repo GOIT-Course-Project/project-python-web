@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 import django_heroku
 
 
@@ -27,12 +28,12 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # os.getenv("SECRET_KEY")
-SECRET_KEY = 'django-insecure-j8ms2sff9(duk#97m3kf0rdpg5udbaj9m1g#$35g%@v$i9!ofa'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+DEBUG = False
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
+                 '127.0.0.1', 'personalhelper.herokuapp.com']
 
 
 # Application definition
@@ -86,6 +87,7 @@ WSGI_APPLICATION = 'personalhelper.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+db_from_env = dj_database_url.config(conn_max_age=600)
 
 DATABASES = {
     # 'default': {
@@ -102,6 +104,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -140,13 +144,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'static'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project_name/static')
+                    ]
 #  BASE_DIR / "static",
 
 # Default primary key field type
@@ -157,12 +162,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
 
-SFTP_STORAGE_HOST = '82.193.125.109'
-SFTP_STORAGE_ROOT = '/home/'
-# {'username': os.getenv('SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
-SFTP_STORAGE_PARAMS = {'username': os.getenv(
-    'SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
-SFTP_STORAGE_INTERACTIVE = False
+# SFTP_STORAGE_HOST = '82.193.125.109'
+# SFTP_STORAGE_ROOT = '/home/'
+# # {'username': os.getenv('SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
+# SFTP_STORAGE_PARAMS = {'username': os.getenv(
+#     'SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
+# SFTP_STORAGE_INTERACTIVE = False
 
 
 LOGIN_REDIRECT_URL = "contacts:index"
