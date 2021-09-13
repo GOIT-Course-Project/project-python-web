@@ -35,7 +35,10 @@
             </td>
             <td>
                 {% for phone in record.phone_set.all %}
-                {{ phone }} <a class="link" href="/contacts/show_contacts/{{phone.id}}/delete_phone">Del</a>
+                {{ phone }}
+                <a class="link" style="vertical-align: text-bottom"
+                    href="/contacts/show_contacts/{{phone.id}}/delete_phone">
+                    <img style="width: 18px" src="https://cdn-icons-png.flaticon.com/512/1345/1345823.png" alt="" /></a>
                 <br>
                 {% endfor %}
             </td>
