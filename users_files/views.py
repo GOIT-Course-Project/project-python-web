@@ -41,6 +41,8 @@ def download_file(request, filename):
         response = HttpResponse(file, content_type=mime_type)
         response['Content-Disposition'] = f"attachment; filename={filename}"
         return response
+    else:
+        return redirect('userfiles')
 
 
 @login_required(login_url='login')
@@ -81,7 +83,7 @@ def order_by(request):
     userfile_list = UserFile.objects.filter(
         user_id=request.user.id).order_by(order_by)
 
-    paginator = Paginator(userfile_list, 10)  # Show 25 contacts per page.
+    paginator = Paginator(userfile_list, 5)  # Show 25 contacts per page.
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

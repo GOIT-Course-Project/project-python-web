@@ -2,21 +2,21 @@
 {% block title %}Add contact{% endblock %}
 {% block header %}
 <h1 style='margin-right: 100px'>Hello, {{ user.username|default:'Guest'}}</h1>
-<li style = 'margin: 10px'><a href="{% url 'contacts:add-contact' %}">Add contact</a></li>
-<li style = 'margin: 10px'><a href="{% url 'contacts:show-contacts' %}">Show contacts</a></li>
-<li style = 'margin: 10px'><a href="{% url 'contacts:search-contact' %}">Search contacts</a></li>
+<li style='margin: 10px'><a href="{% url 'contacts:add-contact' %}">Add contact</a></li>
+<li style='margin: 10px'><a href="{% url 'contacts:index' %}">Show contacts</a></li>
+<li style='margin: 10px'><a href="{% url 'contacts:search-contact' %}">Search contacts</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="features">
     <h1>Add contact</h1>
     <p>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            {{form1.as_p}}
-            <input type='submit' value='Submit'>
-        </form>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{form1.as_p}}
+        <input type='submit' value='Submit'>
+    </form>
     </p>
 </div>
 {% endblock %}
