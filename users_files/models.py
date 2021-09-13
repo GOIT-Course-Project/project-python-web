@@ -23,7 +23,7 @@ class UserFile(models.Model):
 
     user = models.ForeignKey(User, on_delete=CASCADE)
     file = models.FileField(
-        upload_to='files\\', storage=LFS, validators=[file_size])
+        upload_to='files/', storage=LFS, validators=[file_size])
     category = models.CharField(max_length=25, choices=CATEGORIES)
 
     def get_absolute_url(self):
