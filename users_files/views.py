@@ -42,7 +42,7 @@ def download_file(request, filename):
         response['Content-Disposition'] = f"attachment; filename={filename}"
         return response
     else:
-        return files_all(request)
+        return redirect('userfiles')
 
 
 @login_required(login_url='login')
