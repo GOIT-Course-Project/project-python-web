@@ -1,7 +1,7 @@
 import os
 import dj_database_url
 import django_heroku
-
+import environ
 
 """
 Django settings for personalhelper project.
@@ -28,7 +28,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # os.getenv("SECRET_KEY")
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY') if os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -163,12 +163,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
 
-# SFTP_STORAGE_HOST = '82.193.125.109'
-# SFTP_STORAGE_ROOT = '/home/'
-# # {'username': os.getenv('SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
-# SFTP_STORAGE_PARAMS = {'username': os.getenv(
-#     'SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
-# SFTP_STORAGE_INTERACTIVE = False
+SFTP_STORAGE_HOST = '82.193.125.109'
+SFTP_STORAGE_ROOT = '/home/'
+# {'username': os.getenv('SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
+SFTP_STORAGE_PARAMS = {'username': os.getenv(
+    'SFTP_STORAGE_USER'), 'password': os.getenv('SFTP_STORAGE_PASSWORD')}
+SFTP_STORAGE_INTERACTIVE = False
 
 
 LOGIN_REDIRECT_URL = "contacts:index"
