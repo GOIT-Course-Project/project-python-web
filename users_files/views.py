@@ -41,6 +41,8 @@ def download_file(request, filename):
         response = HttpResponse(file, content_type=mime_type)
         response['Content-Disposition'] = f"attachment; filename={filename}"
         return response
+    else:
+        return files_all(request)
 
 
 @login_required(login_url='login')
