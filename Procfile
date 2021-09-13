@@ -1,1 +1,1 @@
-web: gunicorn personalhelper.personalhelper.wsgi
+web: gunicorn personalhelper.wsgi
